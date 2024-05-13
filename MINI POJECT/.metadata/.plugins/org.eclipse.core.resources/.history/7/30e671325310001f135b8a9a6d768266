@@ -1,0 +1,64 @@
+package com.app.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.app.binding.Contact;
+import com.app.repository.ContactRepositoy;
+
+public class ContactServiceImpl implements ContactService {
+
+	@Autowired
+	ContactRepositoy repo;
+	@Override
+	public String createContact(Contact contact) {
+	
+		 contact = repo.save(contact);
+		
+		 return "Sucessfylly created contact";
+		
+	}
+
+	
+	@Override
+	public Contact getContactById(int id) {
+	
+		Optional<Contact> findById = repo.findById(id);
+		
+		if(findById.isPresent()) {
+			
+			Contact contact = findById.get();
+			
+			return contact;
+		}
+		
+		
+		return null;
+	}
+
+	@Override
+	public List<Contact> getAllContact() {
+
+
+			List<Contact> findAll = repo.findAll();
+		return findAll;
+	}
+
+	@Override
+	public String updateContact(Contact contact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteContactById(int contact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	
+}
